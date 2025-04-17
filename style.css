@@ -1,0 +1,37 @@
+body {
+  font-family: 'Arial';
+  text-align: center;
+  background: #f0f8ff;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 3em;
+  color: #222;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 1em;
+  margin: 10px;
+}
+
+#items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.item {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  background: white;
+}
+
+.hidden {
+  display: none;
+}
