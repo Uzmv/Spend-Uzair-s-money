@@ -19,16 +19,33 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
       font-size: 2rem;
       color: #ffffff;
     }
 
     #money-display {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       font-size: 1.2rem;
       color: #00ff99;
+    }
+
+    #reset-button {
+      display: block;
+      margin: 0 auto 2rem auto;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      background-color: #ff0066;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #reset-button:hover {
+      background-color: #cc0052;
     }
 
     .products {
@@ -43,11 +60,13 @@
       padding: 1rem;
       text-align: center;
       box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-      transition: transform 0.2s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .product:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.08);
     }
 
     .product img {
@@ -56,6 +75,7 @@
       object-fit: cover;
       border-radius: 10px;
       margin-bottom: 0.5rem;
+      transition: transform 0.3s ease;
     }
 
     .product h2 {
@@ -67,6 +87,10 @@
     .product p {
       color: #999;
       margin-bottom: 0.5rem;
+    }
+
+    .product:active img {
+      transform: scale(0.95);
     }
 
     @media (max-width: 600px) {
@@ -83,10 +107,12 @@
 <body>
   <h1>Spend My Money 💸</h1>
   <h2 id="money-display">💰 Total: $100,000,000,000,000,000</h2>
+  <button id="reset-button">Reset Money</button>
   <div class="products" id="product-list"></div>
 
   <script>
-    let totalMoney = 100000000000000000;
+    const originalMoney = 100000000000000000;
+    let totalMoney = originalMoney;
 
     const products = [
       {
@@ -168,6 +194,7 @@
 
     const productList = document.getElementById("product-list");
     const moneyDisplay = document.getElementById("money-display");
+    const resetButton = document.getElementById("reset-button");
 
     function updateMoneyDisplay() {
       moneyDisplay.textContent = `💰 Total: $${totalMoney.toLocaleString()}`;
@@ -188,13 +215,15 @@
         if (totalMoney >= product.price) {
           totalMoney -= product.price;
           updateMoneyDisplay();
-          alert(`You bought: ${product.name} for $${product.price.toLocaleString()}!`);
-        } else {
-          alert(`You're too broke for ${product.name} 😢`);
         }
       });
 
       productList.appendChild(div);
+    });
+
+    resetButton.addEventListener("click", () => {
+      totalMoney = originalMoney;
+      updateMoneyDisplay();
     });
   </script>
 </body>
